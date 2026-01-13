@@ -53,8 +53,9 @@ Wayland環境下のElectronアプリで日本語入力を可能にするため�
     - **バックアップ**: `configs/local/share/applications/cursor.desktop`, `configs/Cursor/User/settings.json`
 - **Slack / Antigravity**:
     - **設定ファイル**: `~/.local/share/applications/{slack,antigravity}.desktop`
+    - **ユーザー設定**: `~/.config/Antigravity/User/settings.json` (ズームレベル等)
     - **変更点**: X11強制、IMEモジュール指定 (Cursorと同様の環境変数を使用)。
-    - **バックアップ**: `configs/local/share/applications/{slack,antigravity}.desktop`
+    - **バックアップ**: `configs/local/share/applications/{slack,antigravity}.desktop`, `configs/Antigravity/User/settings.json`
 
 ## 3. 追加スクリプト (Custom Scripts)
 
