@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Antigravity
+Name=Antigravity(X11)
 Comment=Experience liftoff
 GenericName=Text Editor
 Exec=env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 SDL_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx /opt/Antigravity/antigravity %F
