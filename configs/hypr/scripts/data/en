@@ -1,0 +1,82 @@
+# Key Notation
+<C->         [Key][Movement][Editing][Visual][Window] Control key (Example: <C-w> means Ctrl + w)
+<S->         [Key][Movement][Editing][Visual] Shift key
+<M->         [Key] Alt key (Meta)
+<Space>      [Key][Leader] Space bar
+<CR>         [Key] Enter / Return
+<Esc>        [Key][Editing][Visual] Escape key
+<Tab>        [Key] Tab key
+
+# Movement
+h            [Movement] Move left
+j            [Movement] Move down
+k            [Movement] Move up
+l            [Movement] Move right
+w            [Movement] Jump by start of words (forward)
+b            [Movement] Jump by start of words (backward)
+e            [Movement] Jump by end of words (forward)
+ge           [Movement] Jump by end of words (backward)
+0            [Movement] Start of line
+^            [Movement] Start of line (non-blank)
+$            [Movement] End of line
+gg           [Movement] Go to first line
+G            [Movement] Go to last line
+<C-u>        [Movement] Up half page
+<C-d>        [Movement] Down half page
+<C-f>        [Movement] Page down
+<C-b>        [Movement] Page up
+%            [Movement] Go to matching bracket
+
+# Editing
+i            [Editing] Insert before cursor
+a            [Editing] Insert after cursor
+I            [Editing] Insert at line start
+A            [Editing] Insert at line end
+o            [Editing] Append new line below
+O            [Editing] Append new line above
+r            [Editing] Replace one character
+R            [Editing] Enter replace mode
+x            [Editing] Delete character
+dd           [Editing] Delete line
+D            [Editing] Delete to end of line
+yy           [Editing] Yank (copy) line
+y$           [Editing] Yank to end of line
+p            [Editing] Paste after cursor
+P            [Editing] Paste before cursor
+u            [Editing] Undo
+<C-r>        [Editing] Redo
+.            [Editing] Repeat last command
+
+# Visual Mode
+v            [Visual] Visual mode (char)
+V            [Visual] Visual mode (line)
+<C-v>        [Visual] Visual mode (block)
+
+# Window Management
+<C-w>h       [Window] Move to left window
+<C-w>j       [Window] Move to window below
+<C-w>k       [Window] Move to window above
+<C-w>l       [Window] Move to right window
+<C-w>s       [Window] Split horizontal
+<C-w>v       [Window] Split vertical
+<C-w>c       [Window] Close window
+<C-w>o       [Window] Close all other windows
+
+# Search & Replace
+/pattern     [Search] Search forward
+?pattern     [Search] Search backward
+n            [Search] Next match
+N            [Search] Previous match
+:%s/old/new/g [Search] Replace all in file
+
+# Files
+:w           [Files] Save file
+:q           [Files] Quit
+:q!          [Files] Quit without saving
+:wq          [Files] Save and quit
+:x           [Files] Save and quit
+
+# Leader (Example)
+<Space>f     [Leader] Find file (Telescope)
+<Space>g     [Leader] Live grep (Telescope)
+<Space>e     [Leader] Toggle explorer
