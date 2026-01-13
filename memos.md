@@ -33,6 +33,12 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ログです。
 - `SUPER + SHIFT + A`: ChatGPT
 - `SUPER + SHIFT + ALT + A`: Grok
 
+### キーリマッピング (Key Remapping)
+`keyd` を使用してキーの物理的な割り当てを変更しています。
+- **設定ファイル**: `/etc/keyd/default.conf` (root権限が必要)
+- **変更内容**: `rightmeta` (Right Command/Win) → `print` (PrintScreen)
+- **関連ファイル**: `configs/keyd/default.conf` にバックアップあり。
+
 ## 2. 日本語入力対応 (Japanese IME Support)
 
 Wayland環境下のElectronアプリで日本語入力を可能にするため、アプリごとに異なる対策を行っています。
