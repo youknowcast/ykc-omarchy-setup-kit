@@ -47,8 +47,15 @@ Wayland環境下のElectronアプリで日本語入力を可能にするため�
 - **内容**: 全ワークスペースのウィンドウ情報を取得し、インクリメンタルサーチで選択可能にする。
 
 ### `omarchy-emergency-jp-input/launch.sh`
+- **ソース**: [omarchy-emergency-jp-input](https://github.com/youknowcast/omarchy-emergency-jp-input)
 - **依存**: `zenity`, `wl-clipboard`
 - **内容**: 簡易的なテキスト入力ダイアログを表示し、入力内容をクリップボードにコピーする。
+
+### `scripts/nvim-cheats.sh`
+- **ソース**: [nvim-cheats](https://github.com/youknowcast/nvim-cheats)
+- **依存**: `fzf`
+- **内容**: Neovimのチートシートを表示・検索するスクリプト。
+- **データ**: `scripts/data/` 以下にチートシートデータを配置。
 
 ## 4. インストール済みアプリケーション・依存ツール
 セットアップ時に追加インストールが必要なもの：
