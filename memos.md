@@ -51,6 +51,10 @@ Wayland環境下のElectronアプリで日本語入力を可能にするため�
     - **起動コマンド**: `env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 SDL_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx ELECTRON_FORCE_DEVICE_SCALE_FACTOR=0.7 /usr/share/cursor/cursor %F`
     - **ユーザー設定**: `~/.config/Cursor/User/settings.json` (ズームレベル等)
     - **バックアップ**: `configs/local/share/applications/cursor.desktop`, `configs/Cursor/User/settings.json`
+- **Slack / Antigravity**:
+    - **設定ファイル**: `~/.local/share/applications/{slack,antigravity}.desktop`
+    - **変更点**: X11強制、IMEモジュール指定 (Cursorと同様の環境変数を使用)。
+    - **バックアップ**: `configs/local/share/applications/{slack,antigravity}.desktop`
 
 ## 3. 追加スクリプト (Custom Scripts)
 
