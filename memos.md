@@ -45,6 +45,12 @@ Wayland環境下のElectronアプリで日本語入力を可能にするため�
 
 - **Obsidian / Typora**: `--enable-wayland-ime` オプションを付与して起動。
 - **Chromium / Chrome**: `chromium-flags.conf` にて X11 バックエンドを強制使用。
+- **Cursor (Editor)**:
+    - **設定ファイル**: `~/.local/share/applications/cursor.desktop` (起動ショートカット)
+    - **変更点**: X11強制、IMEモジュール指定、スケーリング調整。
+    - **起動コマンド**: `env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 SDL_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx ELECTRON_FORCE_DEVICE_SCALE_FACTOR=0.7 /usr/share/cursor/cursor %F`
+    - **ユーザー設定**: `~/.config/Cursor/User/settings.json` (ズームレベル等)
+    - **バックアップ**: `configs/local/share/applications/cursor.desktop`, `configs/Cursor/User/settings.json`
 
 ## 3. 追加スクリプト (Custom Scripts)
 
