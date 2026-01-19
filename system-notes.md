@@ -1,6 +1,6 @@
-# Omarchy セットアップログ
+# Omarchy システムノート
 
-Youknowcast (ykc) 用の Omarchy 設定・構築ログです。
+Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
 初期セットアップ以降に行われた重要な変更点や、システム復旧時に特に注意すべき点を記録しています。
 
 ## 1. 重要な設定変更 (Config Changes)
@@ -78,13 +78,3 @@ Wayland環境下のElectronアプリで日本語入力を可能にするため�
 - **内容**: Neovimのチートシートを表示・検索するスクリプト。
 - **データ**: `scripts/data/` 以下にチートシートデータを配置。
 
-## 4. インストール済みアプリケーション・依存ツール
-セットアップ時に追加インストールが必要なもの：
-
-- **必須ツール**: `fzf`, `jq`, `zenity`, `wl-clipboard`
-- **アプリケーション**:
-    - Ghostty (Terminal)
-    - Obsidian
-    - Typora
-    - 1Password
-    - Google Chrome / Chromium (Web Apps用)

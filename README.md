@@ -21,4 +21,5 @@ This repository manages custom configurations, scripts, and application fixes es
 
 ## Documentation
 
-See [memos.md](./memos.md) for detailed setup logs and configuration notes.
+- [system-notes.md](./system-notes.md): OS 設定・構築ノート
+- [apps.md](./apps.md): 3rd party アプリの導入・運用メモ
