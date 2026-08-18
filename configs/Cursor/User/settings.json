@@ -1,5 +1,6 @@
 {
     "window.commandCenter": true,
-    "workbench.colorTheme": "Hackerman",
-    "window.zoomLevel": -3
+    "workbench.colorTheme": "Vantablack",
+    "window.zoomLevel": -3,
+    "diffEditor.ignoreTrimWhitespace": false
 }
