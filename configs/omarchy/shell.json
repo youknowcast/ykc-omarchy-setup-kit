@@ -1,0 +1,81 @@
+{
+  "bar": {
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "center": [
+        {
+          "id": "omarchy.indicators"
+        },
+        {
+          "format": "yyyy/MM/dd (ddd) HH:mm",
+          "formatAlt": "dd MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
+          "verticalFormat": "HH\n—\nmm"
+        },
+        {
+          "exec": "~/.config/omarchy/bar/scripts/ime.sh",
+          "id": "ime",
+          "interval": 3,
+          "tooltip": "Input method",
+          "type": "command"
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        },
+        {
+          "id": "omarchy.active-window"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "youknow.workspaces"
+        }
+      ],
+      "right": [
+        {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "exec": "printf '󰍛'",
+          "id": "cpu",
+          "interval": 300,
+          "onClick": "omarchy-launch-or-focus-tui btop",
+          "tooltip": "CPU (btop)",
+          "type": "command"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power"
+        }
+      ]
+    },
+    "position": "top",
+    "transparent": false
+  },
+  "idle": {
+    "lock": 300,
+    "screensaver": 150
+  },
+  "plugins": [],
+  "version": 1
+}
