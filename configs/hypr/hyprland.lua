@@ -31,9 +31,8 @@ require("default.hypr.toggles")
 -- miryam の会話・ニュース窓を中央フロート表示 (マスコット本体は layer-shell で対象外)
 o.window("^dev\\.youknow\\.miryam$", { float = true, center = true })
 
--- 仕事用 (workspace 2) / 趣味用 (workspace 3) の自動配置
+-- 仕事用 (workspace 2) の自動配置
 o.window("^(cursor|Cursor)$", { workspace = "2" })
-o.window("^(antigravity|Antigravity)$", { workspace = "3" })
 
 -- 透過
 o.window(".*", { opacity = "0.80 0.80" })

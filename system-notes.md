@@ -75,7 +75,7 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
   発火しなくなるため (Shift リリース時の keysym が Caps_Lock になり、修飾キー2連打判定が成立しない)。
   代償として「両 Shift 同時押しで Caps Lock トグル」は無効。
 - **`hyprland.lua`**: ウィンドウルールと環境変数。
-    - `cursor` → workspace 2 / `antigravity` → workspace 3 に自動配置。
+    - `cursor` → workspace 2 に自動配置。
     - 全ウィンドウ `opacity 0.80`、`special:scratchpad` は `0.40`。
     - window-switcher / Emergency JP Input / nvim-cheats をフロート中央表示。
     - `dev.youknow.miryam` の会話・ニュース窓をフロート中央表示。
@@ -162,11 +162,6 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
       **shadow する**。`MimeType=x-scheme-handler/slack;` を書き忘れると `slack://` の deep link が
       効かなくなり、ブラウザからのログインが完了できない (web 版時代はこれで詰まった)。
     - **バックアップ**: `configs/local/share/applications/slack.desktop`
-- **Antigravity**:
-    - **設定ファイル**: `~/.local/share/applications/antigravity.desktop`
-    - **ユーザー設定**: `~/.config/Antigravity/User/settings.json` (ズームレベル等)
-    - **変更点**: X11強制、IMEモジュール指定 (Cursorと同様の環境変数を使用)。
-    - **バックアップ**: `configs/local/share/applications/antigravity.desktop`, `configs/Antigravity/User/settings.json`
 
 ## 3. 追加スクリプト (Custom Scripts)
 
