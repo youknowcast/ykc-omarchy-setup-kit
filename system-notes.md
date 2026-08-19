@@ -95,6 +95,28 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
   Vivaldi の起動判定は `pgrep -x vivaldi-bin` (実行バイナリは `/opt/vivaldi/vivaldi-bin`。
   `vivaldi-stable` は `/opt/vivaldi/vivaldi` ラッパーへの symlink なので `-x` では引っかからない)。
 
+### Hyprland のランタイム操作 (Lua 層)
+
+Quattro の Hyprland (0.56) は Lua 設定層を持つ。設定ファイルが `*.lua` なだけでなく、
+**IPC も Lua 経由が正**で、旧来の hyprctl サブコマンドの一部が使えない。
+
+- **`hyprctl setprop` は使えない**。`unknown request` を返すが、**終了コードは 0**。
+  スクリプトから叩くと失敗が黙って通る。`getprop` は動くので、片方だけ試すと気づけない。
+- **`hyprctl dispatch <dispatcher>` も Lua として評価される**ので、引数の書き方によっては
+  `')' expected near ...` という Lua パースエラーになる。
+- 正しい経路は `hyprctl eval <code>` / `hyprctl repl <code>`。`repl` は戻り値を表示するが
+  `eval` は `ok` しか返さないので、確認したいときは `repl` を使う。
+- API 一覧: `hyprctl repl 'local t={} for k,v in pairs(hl) do t[#t+1]=k end table.sort(t) return table.concat(t,"  ")'`
+- ウィンドウルールの動的追加 (例: スクリーンショット用に一時的に不透明化):
+
+  ```
+  hyprctl repl 'hl.window_rule({ opacity = "1.0 override 1.0 override", match = { class = "^(chromium|vivaldi-stable|chrome-.*)$" } }) hl.exec_scheduled_prop_refresh_immediately()'
+  ```
+
+  `hyprctl reload` で設定ファイルの内容 (`opacity 0.80`) に戻る。設定ファイルは触らない。
+- `o.window(match, rules)` は `hl.window_rule(rules)` の薄いラッパー
+  (`/usr/share/omarchy/default/hypr/helpers.lua`)。ランタイムでも同じ構造体を渡せる。
+
 ### GPU (EGL/GLX ベンダ固定)
 - **設定ファイル**: `~/.config/hypr/hyprland.lua`
 - **内容**: `__EGL_VENDOR_LIBRARY_FILENAMES=/usr/share/glvnd/egl_vendor.d/50_mesa.json`,
