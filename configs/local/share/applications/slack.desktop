@@ -1,22 +1,11 @@
-#[Desktop Entry]
-#Name=Slack(X11)
-#StartupWMClass=Slack
-#Comment=Slack Desktop
-#GenericName=Slack Client for Linux
-##Exec=env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 SDL_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx --disable-features=WaylandIME /usr/bin/slack --gtk-version=3 -s %U
-#Exec=env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 SLACK_ENABLE_WAYLAND=0 XMODIFIERS=@im=fcitx SDL_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx --disable-features=WaylandIME /usr/bin/slack --gtk-version=3 -s %U
-#Icon=slack
-#Type=Application
-#StartupNotify=true
-#Categories=GNOME;GTK;Network;InstantMessaging;
-#MimeType=x-scheme-handler/slack;
-
 [Desktop Entry]
-Name=Slack (Web)
-Comment=Slack Web in Chromium (X11)
-Exec=env OZONE_PLATFORM=x11 ELECTRON_OZONE_PLATFORM_HINT=x11 GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx SDL_IM_MODULE=fcitx XMODIFIERS=@im=fcitx chromium --ozone-platform=x11 --ozone-platform-hint=x11 --disable-features=WaylandIME --app=https://app.slack.com/client %U
+Name=Slack
+StartupWMClass=Slack
+Comment=Slack Desktop
+GenericName=Slack Client for Linux
+Exec=/usr/bin/slack --gtk-version=3 --ozone-platform=wayland --ozone-platform-hint=wayland -s %U
 Icon=slack
 Type=Application
-Categories=Network;InstantMessaging;
 StartupNotify=true
-Terminal=false
+Categories=GNOME;GTK;Network;InstantMessaging;
+MimeType=x-scheme-handler/slack;

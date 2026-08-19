@@ -39,9 +39,33 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
 ### Chromium / Electron 系アプリ設定
 - **日本語入力対応 (Chromium)**:
     - 設定ファイル: `~/.config/chromium-flags.conf`
-    - 変更点: Waylandネイティブではなく **X11 (XWayland)** で動作するように強制。
-    - 理由: Waylandネイティブ動作時の日本語入力(IME)不具合を回避するため。
-    - 設定値: `--ozone-platform=x11`, `--ozone-platform-hint=x11`
+    - 現在: **Wayland ネイティブ**。`--ozone-platform=wayland`, `--ozone-platform-hint=wayland`
+    - 経緯: 以前は Wayland ネイティブ時の IME 不具合 (切り替えが効いたり永続的に無効になったり
+      する非決定的な挙動) を避けるため X11 を強制していた。Chromium **M135 (2025-04)** で
+      `WaylandTextInputV3` が default enabled になり、既定で GTK IME 経路が拾われる問題が
+      解消されたため、2026-08-19 に Wayland へ戻した (chromium 151 / Hyprland 0.56.2 で検証)。
+    - 削除した設定: `--disable-features=WaylandIME`。この feature 名は Chromium に存在せず
+      (実在するのは `WaylandTextInputV3`)、未知の feature 名は黙って無視されるため no-op だった。
+    - `omarchy-launch-webapp` は既定ブラウザの `--app=` を呼ぶだけなので、webapp 群もこの設定に追随する。
+      ただし `ChatGPT.desktop` だけは `vivaldi-stable` を直接指定しているため対象外。
+- **日本語入力対応 (Vivaldi)**:
+    - 設定ファイル: `~/.config/vivaldi-stable.conf` (ラッパー `/opt/vivaldi/vivaldi` が
+      `$XDG_CONFIG_HOME/vivaldi-$CHROME_VERSION_EXTRA.conf` を読む。stable 版なので `vivaldi-stable.conf`)
+    - 現在: **Wayland ネイティブ**。`--ozone-platform=wayland`, `--ozone-platform-hint=wayland`
+    - 経緯: 本来 Vivaldi を常用したいが、Chromium と同じ Wayland IME 問題のため
+      やむなく chromium を使っていた。Vivaldi 8.1 は **Chromium 150 ベース**で M135 より先のため
+      同じ理屈で解消済み。2026-08-19 に検証して Wayland へ移行。
+    - `~/.local/share/applications/vivaldi-stable.desktop` から `env OZONE_PLATFORM=x11` を除去。
+      このファイルはパッケージ版との差分が上記と MimeType への `x-scheme-handler/ftp` /
+      `mailto` 追加だけなので、後者のためにユーザー側ファイルを残している。
+    - **chromium からあえてコピーしていないフラグ**:
+        - `--password-store=gnome-libsecret`: 既存プロファイルのパスワードストアを変更すると
+          保存済みパスワードが読めなくなる恐れがあるため。
+        - `--force-device-scale-factor=1.2`: Vivaldi 側は UI ズーム未設定 (等倍) で使ってきたため。
+        - `--enable-features=TouchpadOverscrollHistoryNavigation`: Vivaldi は独自のジェスチャ設定を持つため。
+    - **未実施**: デフォルトブラウザの切り替え (`xdg-settings set default-web-browser vivaldi-stable.desktop`)。
+      実行すると `omarchy-launch-webapp` 経由の webapp 群が一斉に Vivaldi 起動へ変わるため、
+      使用感を見てから判断する。
 
 ### Hyprland 設定 (`~/.config/hypr/*.lua`)
 
@@ -67,7 +91,9 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
     - `SUPER + U`: 緊急日本語入力
     - `SUPER + I`: nvim-cheats
     - 現在の全バインド確認: `omarchy menu keybindings --print`
-- **`autostart.lua`**: 起動時に chromium / ghostty を起動 (未起動時のみ)。
+- **`autostart.lua`**: 起動時に vivaldi / ghostty を起動 (未起動時のみ)。
+  Vivaldi の起動判定は `pgrep -x vivaldi-bin` (実行バイナリは `/opt/vivaldi/vivaldi-bin`。
+  `vivaldi-stable` は `/opt/vivaldi/vivaldi` ラッパーへの symlink なので `-x` では引っかからない)。
 
 ### GPU (EGL/GLX ベンダ固定)
 - **設定ファイル**: `~/.config/hypr/hyprland.lua`
@@ -76,6 +102,15 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
 - **理由**: このマシンは AMD 780M のみ (NVIDIA GPU 無し) だが `nvidia-utils` が
   `10_nvidia.json` を置くため libglvnd が NVIDIA EGL を読み込み、chromium の GPU プロセスが
   SEGV → GPU 無効化にフォールバックして WebGL が全滅する (Figma が "WebGL isn't supported")。
+- **2026-08-19 に `nvidia-utils` 本体を削除して根本解決**:
+  `pacman -Rs nvidia-utils` で `egl-x11` / `egl-wayland` / `egl-wayland2` / `egl-gbm` /
+  `eglexternalplatform` も同時に削除。`opengl-driver` は mesa、`vulkan-driver` は
+  vulkan-radeon が提供するため連鎖削除は発生しない。`egl_vendor.d` は `50_mesa.json` のみになった。
+- **上記 2 行は冗長になったが保険として残置**。`nvidia-utils` は明示インストールではなく
+  依存として入っていたため、再び引き込まれる可能性がある。
+- **注意**: Hyprland の `env =` は**設定読み込み時にしか適用されない**。この 2 行を追加しても
+  Hyprland を再起動するまで既存セッションには一切効かない (2026-08-18 に追加したが未適用のまま
+  8/19 に同じクラッシュを2回踏んだ)。
 - **注意**: NVIDIA GPU を積む構成に変えたらこの 2 行を削除すること。
 
 ### Omarchy shell (バー / 通知 / ロック)
@@ -108,7 +143,8 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
 アプリ個別の対策:
 
 - **Obsidian / Typora**: `--enable-wayland-ime` オプションを付与して起動。
-- **Chromium / Chrome**: `chromium-flags.conf` にて X11 バックエンドを強制使用。
+- **Chromium**: Wayland ネイティブ。M135 以降は `--enable-wayland-ime` も不要 (1章参照)。
+- **Vivaldi**: Wayland ネイティブ。常用ブラウザ。Chromium 150 ベース (1章参照)。
 - **Cursor (Editor)**:
     - **設定ファイル**: `~/.local/share/applications/cursor.desktop` (起動ショートカット)
     - **変更点**: X11強制、IMEモジュール指定、スケーリング調整。
@@ -117,7 +153,14 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
     - **バックアップ**: `configs/local/share/applications/cursor.desktop`, `configs/Cursor/User/settings.json`
 - **Slack**:
     - **設定ファイル**: `~/.local/share/applications/slack.desktop`
-    - **変更点**: Slackアプリの挙動が不安定なため、Chromiumのアプリモード (`chromium --app=...`) で起動するように変更。
+    - **現在**: native アプリ版を Wayland ネイティブで起動 (slack-desktop 4.47.69 / Electron 39.2.4 /
+      Chrome 142。M135 以降なので IME 問題は解消済み。2026-08-19 に検証)。
+    - **起動コマンド**: `/usr/bin/slack --gtk-version=3 --ozone-platform=wayland --ozone-platform-hint=wayland -s %U`
+    - **経緯**: 以前は Wayland の IME 不具合を避けるため web 版を Chromium のアプリモード
+      (`chromium --app=https://app.slack.com/client`) で起動していた。2026-08-19 に native へ復帰。
+    - **注意**: ユーザー側の `slack.desktop` はパッケージ版 `/usr/share/applications/slack.desktop` を
+      **shadow する**。`MimeType=x-scheme-handler/slack;` を書き忘れると `slack://` の deep link が
+      効かなくなり、ブラウザからのログインが完了できない (web 版時代はこれで詰まった)。
     - **バックアップ**: `configs/local/share/applications/slack.desktop`
 - **Antigravity**:
     - **設定ファイル**: `~/.local/share/applications/antigravity.desktop`
