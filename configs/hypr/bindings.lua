@@ -56,3 +56,5 @@ o.bind("SUPER + U", "Emergency JP input", "~/.config/hypr/scripts/omarchy-emerge
 
 -- nvim-cheats (was bound to SUPER+I)
 o.bind("SUPER + I", "Nvim cheats", "ghostty --title=nvim-cheats -e ~/.config/hypr/scripts/nvim-cheats.sh")
+
+o.bind("SUPER + SHIFT + L", "Ledge", "omarchy-shell bylund.ledge toggle")

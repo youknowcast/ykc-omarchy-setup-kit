@@ -145,6 +145,11 @@ Quattro の Hyprland (0.56) は Lua 設定層を持つ。設定ファイルが `
       ワークスペース番号の代わりに日本語ラベル (`[1]汎用` `[2]仕事用1` ...) を表示し、
       幅を固定せずラベル長に追従させている。実体は
       `~/.config/omarchy/plugins/youknow.workspaces/`。
+    - `bylund.ledge`: 3rd party のファイル一時置き場ウィジェット。
+      `omarchy plugin add https://github.com/andreas-bylund/omarchy-ledge.git` で導入。
+      バー右のトレイ隣に配置し、ファイルをドロップしてあとからドラッグで取り出す。
+      `SUPER + SHIFT + L` で開閉。実体は `~/.config/omarchy/plugins/bylund.ledge/`。
+      状態は `~/.local/state/omarchy-ledge/ledge.json` に保存。
 - 時計フォーマットは `yyyy/MM/dd (ddd) HH:mm`。
 - アイドル: スクリーンセーバー 150 秒 / ロック 300 秒 (旧 `hypridle.conf` 相当)。
 - 変更は保存で hot-reload。壊したら `omarchy refresh shell` (バックアップが作られる)。
