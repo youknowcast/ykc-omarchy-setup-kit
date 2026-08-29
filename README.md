@@ -25,6 +25,7 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 - **Custom Scripts**:
   - `window-switcher.sh`: `fzf`-based window switcher.
   - `nvim-cheats`: Quick access to Neovim cheat sheets.
+  - `close-window-confirm.sh`: `SUPER + W` で Chromium のみ閉じる前に確認 (zenity)。
 - **Key Remapping**: `keyd` configuration mapping `Right Meta` -> `PrintScreen`.
 
 ## configs/ の配置

@@ -104,6 +104,9 @@ Quattro の Hyprland (0.56) は Lua 設定層を持つ。設定ファイルが `
   スクリプトから叩くと失敗が黙って通る。`getprop` は動くので、片方だけ試すと気づけない。
 - **`hyprctl dispatch <dispatcher>` も Lua として評価される**ので、引数の書き方によっては
   `')' expected near ...` という Lua パースエラーになる。
+- 実例: `hyprctl dispatch closewindow` は `hl.dispatch: expected a dispatcher (e.g. hl.dsp.window.close())`
+  で**黙って失敗する**。アクティブウィンドウのクローズは `hyprctl dispatch "hl.dsp.window.close()"` を使う
+  (例: `configs/hypr/scripts/close-window-confirm.sh`)。
 - 正しい経路は `hyprctl eval <code>` / `hyprctl repl <code>`。`repl` は戻り値を表示するが
   `eval` は `ok` しか返さないので、確認したいときは `repl` を使う。
 - API 一覧: `hyprctl repl 'local t={} for k,v in pairs(hl) do t[#t+1]=k end table.sort(t) return table.concat(t,"  ")'`
