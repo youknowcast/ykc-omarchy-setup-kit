@@ -1,0 +1,12 @@
+[Unit]
+Description=Keychron Nape Pro vendor interface reader (prevents firmware wedge on layer switch)
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/nape-pro-reader.sh
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
