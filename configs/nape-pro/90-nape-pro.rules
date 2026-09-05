@@ -1,0 +1,2 @@
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ENV{ID_VENDOR_ID}=="3434", ENV{ID_MODEL_ID}=="0440", ENV{ID_USB_INTERFACE_NUM}=="01", SYMLINK+="nape-pro-vendor"
+KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ENV{ID_VENDOR_ID}=="3434", ENV{ID_MODEL_ID}=="0440", ENV{ID_USB_INTERFACE_NUM}=="02", SYMLINK+="nape-pro-doh"

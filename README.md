@@ -27,6 +27,9 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
   - `nvim-cheats`: Quick access to Neovim cheat sheets.
   - `close-window-confirm.sh`: `SUPER + W` で Chromium のみ閉じる前に確認 (zenity)。
 - **Key Remapping**: `keyd` configuration mapping `Right Meta` -> `PrintScreen`.
+- **Keychron Nape Pro workaround**: レイヤー切替時にファームウェアがハングする既知バグへの回避策。
+  udev ルールでベンダーインターフェース (`hidraw`) を安定名で公開し、systemd サービスが常時読み取って
+  ファームウェアのブロッキングを防ぐ。詳細は [nape-pro/README.md](./configs/nape-pro/README.md)。
 
 ## configs/ の配置
 
@@ -42,6 +45,9 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 | `configs/Cursor/` | `~/.config/` 直下の同名パス |
 | `configs/local/share/applications/*.desktop` | `~/.local/share/applications/` |
 | `configs/keyd/default.conf` | `/etc/keyd/default.conf` (要 root) |
+| `configs/nape-pro/90-nape-pro.rules` | `/etc/udev/rules.d/90-nape-pro.rules` (要 root) |
+| `configs/nape-pro/nape-pro-reader.sh` | `/usr/local/bin/nape-pro-reader.sh` (要 root) |
+| `configs/nape-pro/nape-pro-reader.service` | `/etc/systemd/system/nape-pro-reader.service` (要 root) |
 
 ## Documentation
 
