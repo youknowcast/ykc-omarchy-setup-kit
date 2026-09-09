@@ -44,6 +44,8 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 | `configs/alacritty/`, `configs/kitty/`, `configs/ghostty/`, `configs/chromium-flags.conf`, `configs/vivaldi-stable.conf` | `~/.config/` 直下の同名パス |
 | `configs/Cursor/` | `~/.config/` 直下の同名パス |
 | `configs/local/share/applications/*.desktop` | `~/.local/share/applications/` |
+| `configs/local/share/mime/packages/text-mdx.xml` | `~/.local/share/mime/packages/` (適用後 `update-mime-database ~/.local/share/mime`) |
+| `configs/mimeapps.list` | `~/.config/mimeapps.list` |
 | `configs/keyd/default.conf` | `/etc/keyd/default.conf` (要 root) |
 | `configs/nape-pro/90-nape-pro.rules` | `/etc/udev/rules.d/90-nape-pro.rules` (要 root) |
 | `configs/nape-pro/nape-pro-reader.sh` | `/usr/local/bin/nape-pro-reader.sh` (要 root) |
