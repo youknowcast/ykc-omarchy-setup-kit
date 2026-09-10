@@ -17,6 +17,7 @@ text/x-c=dev.zed.Zed.desktop
 text/x-c++=dev.zed.Zed.desktop
 application/xml=dev.zed.Zed.desktop
 text/xml=dev.zed.Zed.desktop
+text/markdown=dev.zed.Zed.desktop
 image/png=imv.desktop
 image/jpeg=imv.desktop
 image/gif=imv.desktop
