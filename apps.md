@@ -31,7 +31,8 @@ Omarchy 環境で利用している 3rd party アプリのインストール・�
 
 - 既定エディタ: `~/.local/state/omarchy/defaults/editor` = `zeditor`(nvim → Zed に変更)。
   `omarchy-launch-editor` が参照する。vim 式 `+N` 行指定は Zed CLI 非対応のため効かない
-- `text/plain` 既定アプリ → Zed(`configs/mimeapps.list`)。
+- テキスト系 mime 型の既定アプリを Zed に統一(`configs/mimeapps.list`。text/plain に加え
+  text/x-c、application/x-shellscript、application/xml 等の nvim.desktop 16 件を全置換)。
   従来の nvim.desktop は `Terminal=true` のため gio open でサイレント失敗する(固有の
   mime 型を持たないテキストが open で開けない問題の解消)
 - `*.mdx` は freedesktop mime DB で `application/x-genesis-32x-rom` に誤マップされている
