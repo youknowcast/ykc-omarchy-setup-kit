@@ -1,0 +1,9 @@
+.opencode
+
+**/.claude/settings.local.json
+.claude-local/
+.codex-local/
+.cursor-local/
+CLAUDE.local.md
+AGENTS.local.md
+.env.local
