@@ -43,6 +43,7 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 | `configs/omarchy/branding/` | `~/.config/omarchy/branding/` |
 | `configs/alacritty/`, `configs/kitty/`, `configs/ghostty/`, `configs/chromium-flags.conf`, `configs/vivaldi-stable.conf` | `~/.config/` 直下の同名パス |
 | `configs/Cursor/` | `~/.config/` 直下の同名パス |
+| `configs/fcitx5/` | `~/.config/fcitx5/` |
 | `configs/local/share/applications/*.desktop` | `~/.local/share/applications/` |
 | `configs/local/share/mime/packages/text-mdx.xml` | `~/.local/share/mime/packages/` (適用後 `update-mime-database ~/.local/share/mime`) |
 | `configs/mimeapps.list` | `~/.config/mimeapps.list` |
