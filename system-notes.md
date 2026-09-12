@@ -170,6 +170,27 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
 が設定し、fcitx5 自体は `omarchy-fcitx5.service` (systemd user unit) が起動する。
 **`GTK_IM_MODULE` だけは Omarchy が設定しない** ので `hyprland.lua` で自前で入れている。
 
+### fcitx5 / Mozc の IME ON/OFF とキー割り当て
+
+Quattro 既定では `変換` / `無変換` は fcitx5 のホットキーに含まれないため、IME 非アクティブ
+(半角英数) のときはキーが Mozc に渡らず何も起きない。fcitx5 のアクティベーション層に
+`ActivateKeys` / `DeactivateKeys` を追加して解決している。
+
+- **設定ファイル**: `~/.config/fcitx5/config` (`configs/fcitx5/config`)
+    - `[Hotkey/ActivateKeys] 0=Henkan` … `変換`。IME OFF のとき IM を有効化 (ひらがな)。
+    - `[Hotkey/DeactivateKeys] 0=Muhenkan` … `無変換`。IME ON のとき IM を無効化 (半角英数)。
+    - fcitx5 は非アクティブ時のみ `ActivateKeys` を、アクティブ時のみ `DeactivateKeys` を
+      消費する。アクティブ時の `変換` は Mozc に素通りし、カスタムキーマップで
+      `CompositionModeHiragana` (ひらがな固定) になる。
+    - `Zenkaku_Hankaku` / `Ctrl+Space` のトグルも従来どおり。
+- **Mozc 設定**: `~/.config/mozc/config1.db` (`configs/mozc/` 参照)
+    - `punctuation_method = COMMA_PERIOD` … `,` `.` が `，` `．` になる。
+    - `space_character_form = FUNDAMENTAL_HALF_WIDTH` … 挿入スペースは常に半角。
+    - カスタムキーマップ (`session_keymap = CUSTOM`):
+      `Henkan` → `CompositionModeHiragana` / `Muhenkan` → `IMEOff`。
+    - `config1.db` は **Mozc が終了時に上書きする** ため、差し替え時は必ず fcitx5 を停止する。
+      導入は `configs/mozc/install.sh`。
+
 アプリ個別の対策:
 
 - **Obsidian / Typora**: `--enable-wayland-ime` オプションを付与して起動。

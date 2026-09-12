@@ -18,10 +18,10 @@ ModifierOnlyKeyTimeout=246
 2=Hangul
 
 [Hotkey/ActivateKeys]
-0=<130>
+0=Henkan
 
 [Hotkey/DeactivateKeys]
-0=Hangul_Hanja
+0=Muhenkan
 
 [Hotkey/EnumerateGroupForwardKeys]
 0=Super+space
