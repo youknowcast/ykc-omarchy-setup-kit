@@ -21,6 +21,8 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
   - Browsers (Chromium / Vivaldi) と Slack は Wayland ネイティブ。Chromium M135 で
     `WaylandTextInputV3` が既定になり X11 強制が不要になった。
   - Cursor はまだ X11/XWayland を強制して `fcitx5` を通している。
+  - `変換` = IME ON (ひらがな) / `無変換` = IME OFF (半角英数)。fcitx5 の
+    `ActivateKeys` / `DeactivateKeys` + Mozc カスタムキーマップで実現 (`configs/mozc/`)。
   - Emergency text input script (GTK3 / Ruby).
 - **Custom Scripts**:
   - `window-switcher.sh`: `fzf`-based window switcher.
@@ -43,7 +45,8 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 | `configs/omarchy/branding/` | `~/.config/omarchy/branding/` |
 | `configs/alacritty/`, `configs/kitty/`, `configs/ghostty/`, `configs/chromium-flags.conf`, `configs/vivaldi-stable.conf` | `~/.config/` 直下の同名パス |
 | `configs/Cursor/` | `~/.config/` 直下の同名パス |
-| `configs/fcitx5/` | `~/.config/fcitx5/` |
+| `configs/fcitx5/` | `~/.config/fcitx5/` (ホットキーは `configs/fcitx5/config`) |
+| `configs/mozc/config1.db` | `~/.config/mozc/config1.db` (`configs/mozc/install.sh`、fcitx5 停止が必要) |
 | `configs/local/share/applications/*.desktop` | `~/.local/share/applications/` |
 | `configs/local/share/mime/packages/text-mdx.xml` | `~/.local/share/mime/packages/` (適用後 `update-mime-database ~/.local/share/mime`) |
 | `configs/mimeapps.list` | `~/.config/mimeapps.list` |
