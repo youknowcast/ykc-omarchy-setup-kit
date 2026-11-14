@@ -23,6 +23,7 @@ ruby-gnome の AUR パッケージ群は互いに完全一致のバージョン�
 - Typora
 - 1Password
 - Chromium (Web Apps用)
+- Orca (Stably AI, agentic coding IDE)
 
 ## 3. JetBrains Toolbox
 
@@ -77,3 +78,12 @@ omarchy restart shell
   フォーカスが来ない(quickshell/Hyprland レベルの問題)。上流報告ドラフトは
   `fileblade-ime-issue-draft.md`。日本語検索は `fileblade search "クエリ"` (ターミナルから)で可能
 - `e`(Edit)の行ジャンプ指定(+N)は Zed CLI が vim 式 `+N` 非対応のため効かない
+
+## 6. Orca (stably-orca-bin)
+
+Stably AI 製の agentic coding IDE (Electron / AppImage)。
+
+- **導入**: `omarchy pkg aur add stably-orca-bin`
+- **CLI**: `orca` shim (`~/.config/orca/linux-orca-cli-shim/orca`、PATH に追加される)
+- **注意**: `~/.config/orca/` は Electron プロファイルで、認証トークン (`orca-runtime.json`)、
+  E2EE 鍵 (`orca-e2ee-keypair.json`)、Cookie を含むためバックアップ対象外
