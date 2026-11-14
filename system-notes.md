@@ -201,7 +201,7 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
 
 ### `scripts/omarchy-emergency-input.sh`
 - **ソース**: [omarchy-emergency-jp-input](https://github.com/youknowcast/omarchy-emergency-jp-input)
-- **依存**: Ruby + `gtk3` gem, `wl-clipboard`
+- **依存**: Ruby + `gtk3` gem (`gem install --user-install`。AUR 版を使わない理由は `apps.md`), `wl-clipboard`
 - **内容**: IMEが効かない環境向けに、GTK3 のテキスト入力ウィンドウを出して
   Ctrl+Enter でクリップボードへコピーする。
 - **バインド**: `SUPER + U`

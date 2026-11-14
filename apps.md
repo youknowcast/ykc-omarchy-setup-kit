@@ -11,6 +11,10 @@ Omarchy 環境で利用している 3rd party アプリのインストール・�
 - Ruby + `gtk3` gem (緊急日本語入力)
 
 導入は `omarchy pkg add <pkg>` (AUR のみのものは `omarchy pkg aur add <pkg>`)。
+ただし `gtk3` gem は AUR の `ruby-gtk3` ではなく `/usr/bin/gem install --user-install gtk3` で入れる。
+ruby-gnome の AUR パッケージ群は互いに完全一致のバージョンを要求し、yay が根元から 1 つずつ
+インストールするため、バージョンが上がるたびに `omarchy-update` が依存関係の破壊で止まる。
+システムの Ruby がメジャーアップデートしたら gem を入れ直す。
 
 ## 2. インストール済みアプリケーション
 
