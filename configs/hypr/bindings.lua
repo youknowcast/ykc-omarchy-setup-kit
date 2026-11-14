@@ -54,9 +54,6 @@ o.bind("SUPER + SHIFT + T", "Activity", "omarchy-launch-tui btop")
 -- Emergency JP input (was bound to SUPER+U)
 o.bind("SUPER + U", "Emergency JP input", "~/.config/hypr/scripts/omarchy-emergency-input.sh")
 
--- nvim-cheats (was bound to SUPER+I)
-o.bind("SUPER + I", "Nvim cheats", "ghostty --title=nvim-cheats -e ~/.config/hypr/scripts/nvim-cheats.sh")
-
 -- Close window with confirm for Chromium (was bound to default close)
 hl.unbind("SUPER + W")
 o.bind("SUPER + W", "Close window (confirm for Chromium)", "~/.config/hypr/scripts/close-window-confirm.sh")

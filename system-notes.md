@@ -89,7 +89,6 @@ Youknowcast (ykc) 用の Omarchy 設定・構築ノートです。
     - `SUPER + SHIFT + E`: Gmail (既定は hey.com)
     - `SUPER + SHIFT + T`: btop
     - `SUPER + U`: 緊急日本語入力
-    - `SUPER + I`: nvim-cheats
     - 現在の全バインド確認: `omarchy menu keybindings --print`
 - **`autostart.lua`**: 起動時に vivaldi / ghostty を起動 (未起動時のみ)。
   Vivaldi の起動判定は `pgrep -x vivaldi-bin` (実行バイナリは `/opt/vivaldi/vivaldi-bin`。
@@ -202,7 +201,7 @@ Quattro は fcitx5 を標準サポートしており、`INPUT_METHOD` / `QT_IM_M
 
 ### `scripts/omarchy-emergency-input.sh`
 - **ソース**: [omarchy-emergency-jp-input](https://github.com/youknowcast/omarchy-emergency-jp-input)
-- **依存**: Ruby + `gtk3` gem, `wl-clipboard`
+- **依存**: Ruby + `gtk3` gem (`gem install --user-install`。AUR 版を使わない理由は `apps.md`), `wl-clipboard`
 - **内容**: IMEが効かない環境向けに、GTK3 のテキスト入力ウィンドウを出して
   Ctrl+Enter でクリップボードへコピーする。
 - **バインド**: `SUPER + U`
