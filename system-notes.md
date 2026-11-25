@@ -142,6 +142,11 @@ Quattro の Hyprland (0.56) は Lua 設定層を持つ。設定ファイルが `
 - 独自ウィジェット:
     - `ime` (command 型): `~/.config/omarchy/bar/scripts/ime.sh` を 3 秒間隔で実行し `あ` / `EN` を表示。
       旧 waybar の `ime.sh` を置き換えたもの (`fcitx5-remote --check` で存在確認するよう改善)。
+    - `orca.items` (command 型): `~/.config/omarchy/bar/scripts/orca-items.sh` を 30 秒間隔で実行し、
+      Orca の `Needs you` 件数を `󰚩 N` で表示。左クリックで Needs you 一覧、右クリックで全 open item、
+      中クリックでサマリをコピーする。`~/.local/state/asumi/progress.json` があれば asumi の headline を
+      ツールチップ先頭に出し、attention 中は `◆` を付ける。一覧の先頭から asumi の Home chat を開ける。
+      導入は `scripts/install-orca-items.sh`。詳細は README。
     - `cpu` (command 型): クリックで btop を起動するだけのアイコン。
     - `youknow.workspaces`: 既定の `omarchy.workspaces` を `omarchy plugin clone` した派生。
       ワークスペース番号の代わりに日本語ラベル (`[1]汎用` `[2]仕事用1` ...) を表示し、
