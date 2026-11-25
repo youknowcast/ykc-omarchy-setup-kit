@@ -16,7 +16,7 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 ## Key Features
 
 - **Hyprland Configs (Lua)**: キーバインド上書き、ウィンドウルール、fcitx5/GPU 向け環境変数。
-- **Omarchy shell**: バー配置 (`shell.json`)、IME 表示用の自作ウィジェット、ワークスペース名表示プラグイン、Ledge (ファイル一時置き場)、Orca items ウィジェット。
+- **Omarchy shell**: バー配置 (`shell.json`)、IME 表示用の自作ウィジェット、ワークスペース名表示プラグイン、Ledge (ファイル一時置き場)、Orca items / asumi 進捗ウィジェット。
 - **Japanese IME Support**:
   - Browsers (Chromium / Vivaldi) と Slack は Wayland ネイティブ。Chromium M135 で
     `WaylandTextInputV3` が既定になり X11 強制が不要になった。
@@ -56,7 +56,7 @@ Quickshell 製の **Omarchy shell** (`~/.config/omarchy/shell.json`) に置き�
 
 ## Orca items ウィジェット
 
-Orca の `Needs you` 件数をバーに表示する command 型ウィジェット。
+Orca の `Needs you` 件数と asumi の進捗をバーに表示する command 型ウィジェット。
 
 ### 導入
 
@@ -93,10 +93,10 @@ Orca の `Needs you` 件数をバーに表示する command 型ウィジェッ�
 
 | 操作 | 動作 |
 |---|---|
-| 表示 | `󰚩 N` (全 bot の `needs_you` 合計) |
-| ホバー | `Needs you N / In progress M` と Needs you の先頭 6 件 (bot 名 + タイトル) |
-| 左クリック | Needs you の item 一覧を `omarchy menu select` で表示 |
-| 右クリック | 全 open item (status 付き) の一覧 |
+| 表示 | `󰚩 N` (全 bot の `needs_you` 合計)。asumi が attention 中は `󰚩 N ◆` |
+| ホバー | 先頭に asumi の headline / lines 先頭 6 件 / updated、続けて `Needs you N / In progress M` と Needs you の先頭 6 件 (bot 名 + タイトル) |
+| 左クリック | 先頭に `asumi の進捗 · <headline>`、続けて Needs you の item 一覧を `omarchy menu select` で表示 |
+| 右クリック | 同じ一覧を全 open item (status 付き) で表示 |
 | 中クリック | 表示中のテキストと tooltip を `wl-copy` でコピーし `notify-send` |
 
 - 一覧から item を選ぶと `stably-orca orca://bot/<bot-id>` でその bot を Orca で開く。
@@ -105,6 +105,27 @@ Orca の `Needs you` 件数をバーに表示する command 型ウィジェッ�
   バーや他のウィジェットは壊れない。一度成功した後は `$XDG_RUNTIME_DIR/orca-items/state.json`
   の直前値を `!` 付きで残す。
 - 更新間隔は 30 秒。Orca 側の item は最大 8 秒でタイムアウトする。
+
+### asumi の進捗
+
+asumi が見回りのたびに更新する `~/.local/state/asumi/progress.json` があれば、バーとメニューの先頭に
+その進捗を表示する。
+
+```json
+{"updated":"ISO 時刻","headline":"…","attention":true,"lines":["…"]}
+```
+
+- `attention` が `true` のときだけバーの `text` 末尾に `◆` を付ける。`class` は `needs_you > 0`
+  または attention のとき `active` になる。
+- ツールチップは `asumi: <headline>`、`lines` の先頭 6 件、`updated` の順に出す。その後ろに従来の
+  `Needs you / In progress` と item 一覧が続く。
+- 左クリック / 右クリックの一覧は先頭が `asumi の進捗 · <headline>` になり、選ぶと
+  `stably-orca orca://bot/a374f8a2-829d-4c20-83b0-7076f0d26077` で asumi の Home chat を開く。
+  ここから item カードを直接開くことはできない。
+- 文字列はタブ・改行を空白に潰し、headline と各 line を 60 文字で切る (行は先頭 6 件)。
+- `progress.json` が無い・JSON が壊れている・`headline` が空のときは asumi 部分を出さず、
+  `󰚩 N` と item 一覧だけの従来動作になる。Orca が止まっている場合の `󰚩 ?` もそのまま。
+- テストなどで場所を変えるときは `ASUMI_PROGRESS_FILE` で上書きできる。
 
 ### 依存
 

@@ -51,7 +51,35 @@ for row in "${bots[@]}"; do
   fi
 done
 
-tooltip="Needs you ${needs} / In progress ${progress}"
+asumi_progress="${ASUMI_PROGRESS_FILE:-$HOME/.local/state/asumi/progress.json}"
+asumi_attention=0
+asumi_tooltip=""
+if [[ -r "$asumi_progress" ]] && jq -e '.headline | type == "string" and length > 0' "$asumi_progress" >/dev/null 2>&1; then
+  headline=$(jq -r '.headline' "$asumi_progress" | tr '\n\t' '  ' | cut -c1-60 | sed 's/[[:space:]]*$//')
+  attention=$(jq -r '.attention // false' "$asumi_progress")
+  updated=$(jq -r '.updated // ""' "$asumi_progress")
+  asumi_lines=()
+  while IFS= read -r line; do
+    [[ -z "$line" ]] && continue
+    asumi_lines+=("・$(printf '%s' "$line" | tr '\n\t' '  ' | cut -c1-60)")
+  done < <(jq -r '(.lines // [])[]' "$asumi_progress" 2>/dev/null)
+  asumi_tooltip="asumi: ${headline}"
+  if (( ${#asumi_lines[@]} > 0 )); then
+    asumi_tooltip+=$'\n'
+    asumi_tooltip+=$(printf '%s\n' "${asumi_lines[@]:0:6}")
+    if (( ${#asumi_lines[@]} > 6 )); then
+      asumi_tooltip+=$'\n'"… ほか $(( ${#asumi_lines[@]} - 6 )) 件"
+    fi
+  fi
+  [[ -n "$updated" ]] && asumi_tooltip+=$'\n'"updated ${updated}"
+  [[ "$attention" == "true" ]] && asumi_attention=1
+fi
+
+tooltip=""
+if [[ -n "$asumi_tooltip" ]]; then
+  tooltip="${asumi_tooltip}"$'\n'
+fi
+tooltip+="Needs you ${needs} / In progress ${progress}"
 if (( ${#items[@]} > 0 )); then
   tooltip+=$'\n'
   tooltip+=$(printf '%s\n' "${items[@]:0:6}")
@@ -62,8 +90,13 @@ else
   tooltip+=$'\nNeeds you はありません'
 fi
 
-class=""
-(( needs > 0 )) && class="active"
+text="󰚩 ${needs}"
+(( asumi_attention )) && text+=" ◆"
 
-output=$(jq -cn --arg text "󰚩 ${needs}" --arg tooltip "$tooltip" --arg class "$class" '{text:$text, tooltip:$tooltip, class:$class}')
+class=""
+if (( needs > 0 )) || (( asumi_attention )); then
+  class="active"
+fi
+
+output=$(jq -cn --arg text "$text" --arg tooltip "$tooltip" --arg class "$class" '{text:$text, tooltip:$tooltip, class:$class}')
 printf '%s\n' "$output" | tee "$cache_file"

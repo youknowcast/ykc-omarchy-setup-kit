@@ -30,8 +30,18 @@ bots_json=$(orca bot list --json 2>/dev/null) || {
 }
 mapfile -t bots < <(jq -r '.result.bots[]? | [.name, .id] | @tsv' <<<"$bots_json" 2>/dev/null)
 
+asumi_id="a374f8a2-829d-4c20-83b0-7076f0d26077"
+asumi_progress="${ASUMI_PROGRESS_FILE:-$HOME/.local/state/asumi/progress.json}"
+asumi_headline=""
+if [[ -r "$asumi_progress" ]] && jq -e '.headline | type == "string" and length > 0' "$asumi_progress" >/dev/null 2>&1; then
+  asumi_headline=$(jq -r '.headline' "$asumi_progress" | tr '\n\t' '  ' | cut -c1-60 | sed 's/[[:space:]]*$//')
+fi
 labels=()
 ids=()
+if [[ -n "$asumi_headline" ]]; then
+  labels+=("asumi の進捗 · ${asumi_headline}")
+  ids+=("$asumi_id")
+fi
 
 for row in "${bots[@]}"; do
   [[ -z "$row" ]] && continue
@@ -54,6 +64,15 @@ for row in "${bots[@]}"; do
     done < <(jq -r '.result.items[]? | select(.status == "needs_you") | [.number, .title] | @tsv' <<<"$json" 2>/dev/null)
   fi
 done
+
+if [[ -n "$asumi_headline" ]] && (( ${#labels[@]} == 1 )); then
+  if [[ "$mode" == "all" ]]; then
+    labels+=("開いている item はありません")
+  else
+    labels+=("Needs you はありません")
+  fi
+  ids+=("")
+fi
 
 if (( ${#labels[@]} == 0 )); then
   if (( dry )); then
