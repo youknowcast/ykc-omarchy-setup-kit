@@ -45,6 +45,16 @@
           "id": "bylund.ledge"
         },
         {
+          "id": "orca.items",
+          "type": "command",
+          "exec": "~/.config/omarchy/bar/scripts/orca-items.sh",
+          "interval": 30,
+          "tooltip": "Orca items",
+          "onClick": "~/.config/omarchy/bar/scripts/orca-items-menu.sh",
+          "onRightClick": "~/.config/omarchy/bar/scripts/orca-items-menu.sh --all",
+          "onMiddleClick": "~/.config/omarchy/bar/scripts/orca-items-copy.sh"
+        },
+        {
           "id": "omarchy.agents"
         },
         {
